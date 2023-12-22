@@ -1,7 +1,9 @@
 import http from "http";
+import { startMessageConsumer } from "./services/kafka";
 import SocketService from "./services/socket";
 
 async function init() {
+  await startMessageConsumer();
   const socketService = new SocketService();
 
   const httpServer = http.createServer();
