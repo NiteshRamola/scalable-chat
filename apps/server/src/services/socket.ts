@@ -1,5 +1,6 @@
 import Redis from "ioredis";
 import { Server } from "socket.io";
+import { produceMessage } from "./kafka";
 
 const redisConfig = {
   host: process.env.REDIS_HOST,
@@ -37,10 +38,11 @@ class SocketService {
       });
     });
 
-    sub.on("message", (channel, message) => {
+    sub.on("message", async (channel, message) => {
       if (channel === "MESSAGES") {
         console.log("Redis:", message);
         io.emit("message", message);
+        await produceMessage(message);
       }
     });
   }
