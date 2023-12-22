@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "tsc -p .",
-    "start": "node dist/index",
-    "dev": "tsc-watch --onSuccess \"node dist/index.js\""
+    "start": "node --env-file=.env dist/index",
+    "dev": "tsc-watch --onSuccess \"node --env-file=.env dist/index.js\""
   },
   "devDependencies": {
     "tsc-watch": "^6.0.4",
